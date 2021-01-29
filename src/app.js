@@ -28,13 +28,33 @@ const runtime = {
     }
 }
 
+const showError = (msg) => {
+    const errMessage = create("div", "error", msg);
+    document.body.appendChild(errMessage);
+    return false;
+}
+
 const initRuntime = () => {
     const search = new URLSearchParams(location.search);
-    if (search.has("from")) runtime.range.from = parseInt(search.get("from"))
-    if (search.has("to")) runtime.range.to = parseInt(search.get("to"))
-    if (search.has("variants")) runtime.variants = parseInt(search.get("variants"))
+    if (search.has("from")) runtime.range.from = parseInt(search.get("from"), 10)
+    if (search.has("to")) runtime.range.to = parseInt(search.get("to"), 10)
+    if (search.has("variants")) runtime.variants = parseInt(search.get("variants"), 10)
+    if (runtime.range.from > runtime.range.to) {
+        const temp = runtime.range.from;
+        runtime.range.from = runtime.range.to;
+        runtime.range.to = temp;
+    }
+    // Check for stupid
+    if (runtime.range.to <= 0 || runtime.range.from < 0) {
+        return showError("TO and FROM must positive numbers; TO must be non-zero");
+    }
+    if (runtime.range.to === runtime.range.from) {
+        return showError("TO and FROM must differ");
+    }
+    runtime.variants = Math.max(1, Math.min(runtime.variants, 20, runtime.range.to - runtime.range.from));
     runtime.totalScore = 0
     runtime.trackRecord = []
+    return true;
 }
 
 const handleVariant = (index, event) => {
@@ -111,7 +131,7 @@ const playRound = () => {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-    initRuntime();
+    if (!initRuntime()) return;
     createScene();
     playRound();
 })

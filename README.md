@@ -14,4 +14,7 @@ Supported parameters:
 | `to` | number | 1 to 999; must be higher than `from` |
 | `variants` | number | > 0; number of answer variants to generate. Recommended to keep this value between 4 and 10, provided that the range allows for this many. |
 
-This hasn't been tested for edge cases, providing dumb values will most likely cause endless loops.
+## Known issues
+- picking variants too quickly may skip playing a sound, if the previous sound hasn't stopped playing yet.
+- right / wrong effect flying off the right side of the screen on mobile devices may cause a weird zoom-out for a moment.
+- on some systems the text-to-speech sounds like a broken robot made of old Soviet vacuum cleaners.
