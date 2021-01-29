@@ -4,7 +4,7 @@ A simple application for kids to learn numbers. Currently supports Russian only.
 
 The interface represents a written out number and a sound playback button which pronounces the number out loud. The player has to pick the correct variant from the ones presented. If an incorrect variant is picked, the variants are reshuffled, to avoid guess-clicking. All attempts are recorded and can be seen in the `track` collapsible control located top right; it displays the numbers played and the number of guesses it took to get to the right one.
 
-Hosted on github.io: https://iggyk.github.io/numbers-tutor/index.html?from={N}&to={N}&variants={N}
+Hosted on github.io: https://iggyk.github.io/numbers-tutor/index.html?from=0&to=100&variants=6
 
 Supported parameters:
 
